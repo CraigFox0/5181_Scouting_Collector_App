@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-//TODO put in App icon
+//TODO Heatmap transit by phone connection
+//TODO Sliders
 //TODO add clear database method
 //TODO change ToggleButton color for alliance
 //TODO remove MatchData class (redundant)
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         List<MatchData> md = new ArrayList<>();
         for (Match mMatch: db.matchDao().getAll()) {
-            MatchData data = new MatchData(mMatch.teamNumber, mMatch.matchNumber, mMatch.isRed, mMatch.colorControl, mMatch.rotationControl, mMatch.climbed, mMatch.dead, mMatch.missedShots, mMatch.lowerShots, mMatch.upperShots, mMatch.innerShots);
+            MatchData data = new MatchData(mMatch.teamNumber, mMatch.matchNumber, mMatch.isRed, mMatch.positionControl, mMatch.rotationControl, mMatch.climbed, mMatch.dead, mMatch.missedShots, mMatch.lowerShots, mMatch.upperShots, mMatch.innerShots, mMatch.missedAutonShots, mMatch.lowerAutonShots, mMatch.upperAutonShots, mMatch.innerAutonShots);
             data.setUid(UUID.fromString(mMatch.uid));
             md.add(data);
         }
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         db = Room.databaseBuilder(getApplicationContext(), MatchDatabase.class, "match-info-database").allowMainThreadQueries().build();
         List<MatchData> md = new ArrayList<>();
         for (Match mMatch: db.matchDao().getAll()) {
-            MatchData data = new MatchData(mMatch.teamNumber, mMatch.matchNumber, mMatch.isRed, mMatch.colorControl, mMatch.rotationControl, mMatch.climbed, mMatch.dead, mMatch.missedShots, mMatch.lowerShots, mMatch.upperShots, mMatch.innerShots);
+            MatchData data = new MatchData(mMatch.teamNumber, mMatch.matchNumber, mMatch.isRed, mMatch.positionControl, mMatch.rotationControl, mMatch.climbed, mMatch.dead, mMatch.missedShots, mMatch.lowerShots, mMatch.upperShots, mMatch.innerShots, mMatch.missedAutonShots, mMatch.lowerAutonShots, mMatch.upperAutonShots, mMatch.innerAutonShots);
             data.setUid(UUID.fromString(mMatch.uid));
             md.add(data);
         }
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 match.teamNumber = matchInfo.getTeamNumber();
                 match.matchNumber = matchInfo.getMatchNumber();
                 match.isRed = matchInfo.isRed();
-                match.colorControl = matchInfo.isColorControl();
+                match.positionControl = matchInfo.isPositionControl();
                 match.rotationControl = matchInfo.isRotationControl();
                 match.climbed = matchInfo.getClimbed();
                 match.dead = matchInfo.isDead();
@@ -118,6 +119,10 @@ public class MainActivity extends AppCompatActivity {
                 match.lowerShots = matchInfo.getLowerShots();
                 match.upperShots = matchInfo.getUpperShots();
                 match.innerShots = matchInfo.getInnerShots();
+                match.missedAutonShots = matchInfo.getMissedAutonShots();
+                match.lowerAutonShots = matchInfo.getLowerAutonShots();
+                match.upperAutonShots = matchInfo.getUpperAutonShots();
+                match.innerAutonShots = matchInfo.getInnerAutonShots();
 
                 db.matchDao().insertAll(match);
             }

@@ -1,18 +1,10 @@
 package co.craigfox.scoutingcollector5181;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
-import android.app.Notification;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,7 +17,7 @@ public class DataCollectionActivity extends AppCompatActivity {
     EditText teamNumber;
     ToggleButton alliance;
     EditText matchNumber;
-    CheckBox colorControl;
+    CheckBox positionControl;
     CheckBox rotationControl;
     RadioGroup climbStatus;
     RadioButton noneButton;
@@ -37,6 +29,10 @@ public class DataCollectionActivity extends AppCompatActivity {
     EditText lowerShots;
     EditText upperShots;
     EditText innerShots;
+    EditText missAutonShots;
+    EditText lowerAutonShots;
+    EditText upperAutonShots;
+    EditText innerAutonShots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +41,7 @@ public class DataCollectionActivity extends AppCompatActivity {
         teamNumber = findViewById(R.id.editText_teamNumber);
         alliance = findViewById(R.id.toggleButton_color);
         matchNumber = findViewById(R.id.editText_matchNumber);
-        colorControl = findViewById(R.id.checkBox_control_color);
+        positionControl = findViewById(R.id.checkBox_control_position);
         rotationControl = findViewById(R.id.checkBox_control_rotation);
         climbStatus = findViewById(R.id.radio_climb);
         noneButton = findViewById(R.id.radioButton_climb_none);
@@ -57,6 +53,10 @@ public class DataCollectionActivity extends AppCompatActivity {
         lowerShots = findViewById(R.id.editText_lower);
         upperShots = findViewById(R.id.editText_upper);
         innerShots = findViewById(R.id.editText_inner);
+        missAutonShots = findViewById(R.id.editText_auton_miss);
+        lowerAutonShots = findViewById(R.id.editText_auton_lower);
+        upperAutonShots = findViewById(R.id.editText_auton_upper);
+        innerAutonShots = findViewById(R.id.editText_auton_inner);
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +76,18 @@ public class DataCollectionActivity extends AppCompatActivity {
                     MatchData matchInfo = new MatchData(Integer.parseInt(teamNumber.getText().toString()),
                             Integer.parseInt(matchNumber.getText().toString()),
                             alliance.isChecked(),
-                            colorControl.isChecked(),
+                            positionControl.isChecked(),
                             rotationControl.isChecked(),
                             climb,
                             dead.isChecked(),
                             Integer.parseInt(0 + missShots.getText().toString()),
                             Integer.parseInt(0 + lowerShots.getText().toString()),
                             Integer.parseInt(0 + upperShots.getText().toString()),
-                            Integer.parseInt(0 + innerShots.getText().toString())
+                            Integer.parseInt(0 + innerShots.getText().toString()),
+                            Integer.parseInt(0 + missAutonShots.getText().toString()),
+                            Integer.parseInt(0 + lowerAutonShots.getText().toString()),
+                            Integer.parseInt(0 + upperAutonShots.getText().toString()),
+                            Integer.parseInt(0 + innerAutonShots.getText().toString())
                     );
                     setResult(RESULT_OK, matchInfo.toIntent());
                     finish();

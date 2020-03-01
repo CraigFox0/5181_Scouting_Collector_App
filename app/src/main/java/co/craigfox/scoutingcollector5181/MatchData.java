@@ -11,7 +11,7 @@ public class MatchData {
     private int teamNumber;
     private int matchNumber;
     private boolean isRed;
-    private boolean colorControl;
+    private boolean positionControl;
     private boolean rotationControl;
     private int climbed;
     private boolean dead;
@@ -20,12 +20,16 @@ public class MatchData {
     private int lowerShots;
     private int upperShots;
     private int innerShots;
+    private int missedAutonShots;
+    private int lowerAutonShots;
+    private int upperAutonShots;
+    private int innerAutonShots;
 
-    public MatchData(int teamNumber, int matchNumber, boolean isRed, boolean colorControl, boolean rotationControl, int climbed, boolean dead, int missedShots, int lowerShots, int upperShots, int innerShots) {
+    public MatchData(int teamNumber, int matchNumber, boolean isRed, boolean positionControl, boolean rotationControl, int climbed, boolean dead, int missedShots, int lowerShots, int upperShots, int innerShots, int missedAutonShots, int lowerAutonShots, int upperAutonShots, int innerAutonShots) {
         this.teamNumber = teamNumber;
         this.matchNumber = matchNumber;
         this.isRed = isRed;
-        this.colorControl = colorControl;
+        this.positionControl = positionControl;
         this.rotationControl = rotationControl;
         this.climbed = climbed;
         this.dead = dead;
@@ -34,20 +38,28 @@ public class MatchData {
         this.lowerShots = lowerShots;
         this.upperShots = upperShots;
         this.innerShots = innerShots;
+        this.missedAutonShots = missedAutonShots;
+        this.lowerAutonShots = lowerAutonShots;
+        this.upperAutonShots = upperAutonShots;
+        this.innerAutonShots = innerAutonShots;
     }
 
     public MatchData(Intent intentData) {
         this(intentData.getIntExtra("teamNumber", 0),
                 intentData.getIntExtra("matchNumber", 0),
                 intentData.getBooleanExtra("isRed", true),
-                intentData.getBooleanExtra("colorControl", false),
+                intentData.getBooleanExtra("positionControl", false),
                 intentData.getBooleanExtra("rotationControl", false),
                 intentData.getIntExtra("climbed", 0),
                 intentData.getBooleanExtra("dead", false),
                 intentData.getIntExtra("missedShots", 0),
                 intentData.getIntExtra("lowerShots", 0),
                 intentData.getIntExtra("upperShots", 0),
-                intentData.getIntExtra("innerShots", 0)
+                intentData.getIntExtra("innerShots", 0),
+                intentData.getIntExtra("missedAutonShots", 0),
+                intentData.getIntExtra("lowerAutonShots", 0),
+                intentData.getIntExtra("upperAutonShots", 0),
+                intentData.getIntExtra("innerAutonShots", 0)
         );
     }
 
@@ -59,8 +71,8 @@ public class MatchData {
         return climbed;
     }
 
-    public boolean isColorControl() {
-        return colorControl;
+    public boolean isPositionControl() {
+        return positionControl;
     }
 
     public boolean isDead() {
@@ -95,12 +107,28 @@ public class MatchData {
         return upperShots;
     }
 
+    public int getMissedAutonShots() {
+        return missedAutonShots;
+    }
+
+    public int getLowerAutonShots() {
+        return lowerAutonShots;
+    }
+
+    public int getInnerAutonShots() {
+        return innerAutonShots;
+    }
+
+    public int getUpperAutonShots() {
+        return upperAutonShots;
+    }
+
     public Intent toIntent() {
         Intent data = new Intent();
         data.putExtra("teamNumber", teamNumber);
         data.putExtra("matchNumber", matchNumber);
         data.putExtra("isRed", isRed);
-        data.putExtra("colorControl", colorControl);
+        data.putExtra("positionControl", positionControl);
         data.putExtra("rotationControl", rotationControl);
         data.putExtra("climbed", climbed);
         data.putExtra("dead", dead);
@@ -108,6 +136,10 @@ public class MatchData {
         data.putExtra("lowerShots", lowerShots);
         data.putExtra("upperShots", upperShots);
         data.putExtra("innerShots", innerShots);
+        data.putExtra("missedAutonShots", missedAutonShots);
+        data.putExtra("lowerAutonShots", lowerAutonShots);
+        data.putExtra("upperAutonShots", upperAutonShots);
+        data.putExtra("innerAutonShots", innerAutonShots);
         return data;
     }
 
@@ -125,14 +157,19 @@ public class MatchData {
         x = x + teamNumber + ", ";
         x = x + matchNumber + ", ";
         x = x + isRed + ", ";
-        x = x + colorControl + ", ";
+        x = x + positionControl + ", ";
         x = x + rotationControl + ", ";
         x = x + climbed + ", ";
         x = x + dead + ", ";
+        //temp shots method
         x = x + missedShots + ", ";
         x = x + lowerShots + ", ";
         x = x + upperShots + ", ";
         x = x + innerShots + ", ";
+        x = x + missedAutonShots + ", ";
+        x = x + lowerAutonShots + ", ";
+        x = x + upperAutonShots + ", ";
+        x = x + innerAutonShots;
         return x;
     }
 }

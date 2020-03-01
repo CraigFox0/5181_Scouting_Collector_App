@@ -18,8 +18,8 @@ public class Match {
     @ColumnInfo(name = "is_red")
     public boolean isRed;
 
-    @ColumnInfo(name = "color_control")
-    public boolean colorControl;
+    @ColumnInfo(name = "position_control")
+    public boolean positionControl;
 
     @ColumnInfo(name = "rotation_control")
     public boolean rotationControl;
@@ -41,4 +41,16 @@ public class Match {
 
     @ColumnInfo(name = "inner_shots")
     public int innerShots;
+
+    @ColumnInfo(name = "missed_auton_shots")
+    public int missedAutonShots;
+
+    @ColumnInfo(name = "lower_auton_shots")
+    public int lowerAutonShots;
+
+    @ColumnInfo(name = "upper_auton_shots")
+    public int upperAutonShots;
+
+    @ColumnInfo(name = "inner_auton_shots")
+    public int innerAutonShots;
 }

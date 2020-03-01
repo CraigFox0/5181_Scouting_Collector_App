@@ -6,7 +6,7 @@
     <string name="park">Park</string>
     <string name="climb">Climbed</string>
     <string name="balance">Climbed and Balanced</string>
-    <string name="control_color">Color Control</string>
+    <string name="control_position">Position Control</string>
     <string name="control_rotation">Rotation Control</string>
     <string name="auton">Auton</string>
     <string name="teleop">Teleop</string>

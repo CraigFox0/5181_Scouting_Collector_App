@@ -10,15 +10,13 @@
 
     <EditText
         android:id="@+id/editText_teamNumber"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/teamNumber"
         android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,39 +24,44 @@
         android:id="@+id/toggleButton_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:textOff="@string/blue"
         android:textOn="@string/red"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText_teamNumber"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editText_matchNumber"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/matchNumber"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_teamNumber" />
 
     <EditText
         android:id="@+id/editText_miss"
-        android:layout_width="0dp"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView_shot_miss"
         app:layout_constraintTop_toBottomOf="@+id/editText_matchNumber" />
+
+    <EditText
+        android:id="@+id/editText_auton_miss"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/editText_miss"
+        app:layout_constraintTop_toTopOf="@+id/editText_miss" />
 
     <TextView
         android:id="@+id/textView_shot_miss"
@@ -71,15 +74,22 @@
 
     <EditText
         android:id="@+id/editText_lower"
-        android:layout_width="0dp"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editText_miss"
         app:layout_constraintTop_toBottomOf="@+id/editText_miss" />
+
+    <EditText
+        android:id="@+id/editText_auton_lower"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/editText_lower"
+        app:layout_constraintTop_toTopOf="@+id/textView_shot_lower" />
 
     <TextView
         android:id="@+id/textView_shot_lower"
@@ -92,15 +102,22 @@
 
     <EditText
         android:id="@+id/editText_upper"
-        android:layout_width="0dp"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editText_lower"
+        app:layout_constraintStart_toEndOf="@+id/textView_shot_upper"
         app:layout_constraintTop_toBottomOf="@+id/editText_lower" />
+
+    <EditText
+        android:id="@+id/editText_auton_upper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/editText_upper"
+        app:layout_constraintTop_toTopOf="@+id/textView_shot_upper" />
 
     <TextView
         android:id="@+id/textView_shot_upper"
@@ -113,15 +130,22 @@
 
     <EditText
         android:id="@+id/editText_inner"
-        android:layout_width="0dp"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editText_upper"
         app:layout_constraintTop_toBottomOf="@+id/editText_upper" />
+
+    <EditText
+        android:id="@+id/editText_auton_inner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/editText_inner"
+        app:layout_constraintTop_toTopOf="@+id/textView_shot_inner" />
 
     <TextView
         android:id="@+id/textView_shot_inner"
@@ -133,24 +157,24 @@
         app:layout_constraintTop_toTopOf="@+id/editText_inner" />
 
     <CheckBox
-        android:id="@+id/checkBox_control_color"
+        android:id="@+id/checkBox_control_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/control_color"
+        android:layout_marginEnd="16dp"
+        android:text="@string/control_position"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_inner" />
 
     <CheckBox
         android:id="@+id/checkBox_control_rotation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/control_rotation"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_control_color" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_inner" />
 
     <RadioGroup
         android:id="@+id/radio_climb"
@@ -192,9 +216,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/dead"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radio_climb" />
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton_color" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
