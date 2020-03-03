@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.fragment.app.DialogFragment;
 
 //TODO implement Heatmap
+//TODO implement auton button       TEST view b/c buttons dont appear
 
 public class HeatMapDialog extends DialogFragment {
     int x = -1;
@@ -33,7 +34,13 @@ public class HeatMapDialog extends DialogFragment {
             }
         });
 
-        builder.setView(image)
+        builder.setMultiChoiceItems(R.array.auton, new boolean[]{false}, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+
+            }
+        })
+                .setView(image)
                 .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (x != -1  && y != -1) {

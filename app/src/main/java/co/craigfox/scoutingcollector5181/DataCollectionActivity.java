@@ -1,13 +1,16 @@
 package co.craigfox.scoutingcollector5181;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.ToggleButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,14 +28,11 @@ public class DataCollectionActivity extends AppCompatActivity {
     RadioButton climbButton ;
     RadioButton balanceButton;
     CheckBox dead;
-    EditText missShots;
-    EditText lowerShots;
-    EditText upperShots;
-    EditText innerShots;
-    EditText missAutonShots;
-    EditText lowerAutonShots;
-    EditText upperAutonShots;
-    EditText innerAutonShots;
+    SeekBar missShots;
+    SeekBar lowerShots;
+    SeekBar upperShots;
+    SeekBar innerShots;
+    Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +49,19 @@ public class DataCollectionActivity extends AppCompatActivity {
         climbButton = findViewById(R.id.radioButton_climb_climb);
         balanceButton = findViewById(R.id.radioButton_climb_balance);
         dead = findViewById(R.id.checkBox_dead);
-        missShots = findViewById(R.id.editText_miss);
-        lowerShots = findViewById(R.id.editText_lower);
-        upperShots = findViewById(R.id.editText_upper);
-        innerShots = findViewById(R.id.editText_inner);
-        missAutonShots = findViewById(R.id.editText_auton_miss);
-        lowerAutonShots = findViewById(R.id.editText_auton_lower);
-        upperAutonShots = findViewById(R.id.editText_auton_upper);
-        innerAutonShots = findViewById(R.id.editText_auton_inner);
+        missShots = findViewById(R.id.seekBar_miss);
+        lowerShots = findViewById(R.id.seekBar_lower);
+        upperShots = findViewById(R.id.seekBar_upper);
+        innerShots = findViewById(R.id.seekBar_inner);
+        submitButton = findViewById(R.id.button_shot_submit);
         FloatingActionButton fab = findViewById(R.id.fab);
-
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new HeatMapDialog();
+                newFragment.show(getSupportFragmentManager(), "heat_map");
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +75,7 @@ public class DataCollectionActivity extends AppCompatActivity {
                 else if (climbId == balanceButton.getId()) {
                     climb = 3;
                 }
-                if (teamNumber != null && matchNumber != null) {
+                if (teamNumber.getText().toString().length() != 0 && matchNumber.getText().toString().length() != 0) {
                     MatchData matchInfo = new MatchData(Integer.parseInt(teamNumber.getText().toString()),
                             Integer.parseInt(matchNumber.getText().toString()),
                             alliance.isChecked(),
@@ -80,14 +83,10 @@ public class DataCollectionActivity extends AppCompatActivity {
                             rotationControl.isChecked(),
                             climb,
                             dead.isChecked(),
-                            Integer.parseInt(0 + missShots.getText().toString()),
-                            Integer.parseInt(0 + lowerShots.getText().toString()),
-                            Integer.parseInt(0 + upperShots.getText().toString()),
-                            Integer.parseInt(0 + innerShots.getText().toString()),
-                            Integer.parseInt(0 + missAutonShots.getText().toString()),
-                            Integer.parseInt(0 + lowerAutonShots.getText().toString()),
-                            Integer.parseInt(0 + upperAutonShots.getText().toString()),
-                            Integer.parseInt(0 + innerAutonShots.getText().toString())
+                            missShots.getProgress(),
+                            lowerShots.getProgress(),
+                            upperShots.getProgress(),
+                            innerShots.getProgress()
                     );
                     setResult(RESULT_OK, matchInfo.toIntent());
                     finish();

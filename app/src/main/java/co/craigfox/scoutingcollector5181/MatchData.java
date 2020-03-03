@@ -20,12 +20,8 @@ public class MatchData {
     private int lowerShots;
     private int upperShots;
     private int innerShots;
-    private int missedAutonShots;
-    private int lowerAutonShots;
-    private int upperAutonShots;
-    private int innerAutonShots;
 
-    public MatchData(int teamNumber, int matchNumber, boolean isRed, boolean positionControl, boolean rotationControl, int climbed, boolean dead, int missedShots, int lowerShots, int upperShots, int innerShots, int missedAutonShots, int lowerAutonShots, int upperAutonShots, int innerAutonShots) {
+    public MatchData(int teamNumber, int matchNumber, boolean isRed, boolean positionControl, boolean rotationControl, int climbed, boolean dead, int missedShots, int lowerShots, int upperShots, int innerShots) {
         this.teamNumber = teamNumber;
         this.matchNumber = matchNumber;
         this.isRed = isRed;
@@ -38,10 +34,6 @@ public class MatchData {
         this.lowerShots = lowerShots;
         this.upperShots = upperShots;
         this.innerShots = innerShots;
-        this.missedAutonShots = missedAutonShots;
-        this.lowerAutonShots = lowerAutonShots;
-        this.upperAutonShots = upperAutonShots;
-        this.innerAutonShots = innerAutonShots;
     }
 
     public MatchData(Intent intentData) {
@@ -55,11 +47,7 @@ public class MatchData {
                 intentData.getIntExtra("missedShots", 0),
                 intentData.getIntExtra("lowerShots", 0),
                 intentData.getIntExtra("upperShots", 0),
-                intentData.getIntExtra("innerShots", 0),
-                intentData.getIntExtra("missedAutonShots", 0),
-                intentData.getIntExtra("lowerAutonShots", 0),
-                intentData.getIntExtra("upperAutonShots", 0),
-                intentData.getIntExtra("innerAutonShots", 0)
+                intentData.getIntExtra("innerShots", 0)
         );
     }
 
@@ -107,22 +95,6 @@ public class MatchData {
         return upperShots;
     }
 
-    public int getMissedAutonShots() {
-        return missedAutonShots;
-    }
-
-    public int getLowerAutonShots() {
-        return lowerAutonShots;
-    }
-
-    public int getInnerAutonShots() {
-        return innerAutonShots;
-    }
-
-    public int getUpperAutonShots() {
-        return upperAutonShots;
-    }
-
     public Intent toIntent() {
         Intent data = new Intent();
         data.putExtra("teamNumber", teamNumber);
@@ -136,10 +108,6 @@ public class MatchData {
         data.putExtra("lowerShots", lowerShots);
         data.putExtra("upperShots", upperShots);
         data.putExtra("innerShots", innerShots);
-        data.putExtra("missedAutonShots", missedAutonShots);
-        data.putExtra("lowerAutonShots", lowerAutonShots);
-        data.putExtra("upperAutonShots", upperAutonShots);
-        data.putExtra("innerAutonShots", innerAutonShots);
         return data;
     }
 
@@ -165,11 +133,7 @@ public class MatchData {
         x = x + missedShots + ", ";
         x = x + lowerShots + ", ";
         x = x + upperShots + ", ";
-        x = x + innerShots + ", ";
-        x = x + missedAutonShots + ", ";
-        x = x + lowerAutonShots + ", ";
-        x = x + upperAutonShots + ", ";
-        x = x + innerAutonShots;
+        x = x + innerShots;
         return x;
     }
 }

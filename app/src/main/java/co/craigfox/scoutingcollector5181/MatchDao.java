@@ -19,6 +19,9 @@ public interface MatchDao {
             "match_number LIKE :matchNum LIMIT 1")
     Match findByMatch(int teamNum, int matchNum);
 
+    @Query("DELETE FROM 'Match'")
+    void deleteAll();
+
     @Insert
     void insertAll(Match... matches);
 

@@ -43,128 +43,104 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_teamNumber" />
 
-    <EditText
-        android:id="@+id/editText_miss"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/textView_shot_miss"
-        app:layout_constraintTop_toBottomOf="@+id/editText_matchNumber" />
-
-    <EditText
-        android:id="@+id/editText_auton_miss"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/editText_miss"
-        app:layout_constraintTop_toTopOf="@+id/editText_miss" />
-
     <TextView
         android:id="@+id/textView_shot_miss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/shot_miss"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText_miss" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_matchNumber" />
 
-    <EditText
-        android:id="@+id/editText_lower"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/editText_miss"
-        app:layout_constraintTop_toBottomOf="@+id/editText_miss" />
-
-    <EditText
-        android:id="@+id/editText_auton_lower"
+    <SeekBar
+        android:id="@+id/seekBar_miss"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/editText_lower"
-        app:layout_constraintTop_toTopOf="@+id/textView_shot_lower" />
+        android:layout_marginEnd="16dp"
+        android:max="5"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/seekBar_upper"
+        app:layout_constraintTop_toTopOf="@+id/textView_shot_miss" />
 
     <TextView
         android:id="@+id/textView_shot_lower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/shot_lower"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText_lower" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_shot_miss" />
 
-    <EditText
-        android:id="@+id/editText_upper"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/textView_shot_upper"
-        app:layout_constraintTop_toBottomOf="@+id/editText_lower" />
-
-    <EditText
-        android:id="@+id/editText_auton_upper"
+    <SeekBar
+        android:id="@+id/seekBar_lower"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/editText_upper"
-        app:layout_constraintTop_toTopOf="@+id/textView_shot_upper" />
+        android:layout_marginEnd="16dp"
+        android:max="5"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/seekBar_upper"
+        app:layout_constraintTop_toTopOf="@+id/textView_shot_lower" />
 
     <TextView
         android:id="@+id/textView_shot_upper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/shot_upper"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText_upper" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_shot_lower" />
 
-    <EditText
-        android:id="@+id/editText_inner"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/editText_upper"
-        app:layout_constraintTop_toBottomOf="@+id/editText_upper" />
-
-    <EditText
-        android:id="@+id/editText_auton_inner"
+    <SeekBar
+        android:id="@+id/seekBar_upper"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/editText_inner"
-        app:layout_constraintTop_toTopOf="@+id/textView_shot_inner" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:max="5"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView_shot_upper"
+        app:layout_constraintTop_toTopOf="@+id/textView_shot_upper" />
 
     <TextView
         android:id="@+id/textView_shot_inner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/shot_inner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText_inner" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_shot_upper" />
 
-    <CheckBox
-        android:id="@+id/checkBox_control_position"
+    <SeekBar
+        android:id="@+id/seekBar_inner"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:max="5"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/seekBar_upper"
+        app:layout_constraintTop_toTopOf="@+id/textView_shot_inner" />
+
+    <Button
+        android:id="@+id/button_shot_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/control_position"
+        android:text="@string/submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_inner" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_inner" />
 
     <CheckBox
         android:id="@+id/checkBox_control_rotation"
@@ -174,7 +150,16 @@
         android:layout_marginTop="16dp"
         android:text="@string/control_rotation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_inner" />
+        app:layout_constraintTop_toBottomOf="@+id/button_shot_submit" />
+
+    <CheckBox
+        android:id="@+id/checkBox_control_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/control_position"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/checkBox_control_rotation" />
 
     <RadioGroup
         android:id="@+id/radio_climb"
