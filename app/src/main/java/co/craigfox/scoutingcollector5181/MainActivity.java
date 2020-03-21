@@ -17,14 +17,15 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-//TODO Heatmap
-//TODO Phone Connection
-//TODO back button behaviour
+//TODO standardize heatmap coordinates
+//TODO change heatmap image
 //TODO fouls
 //TODO change ToggleButton color for alliance
-//TODO remove MatchData class (redundant)
+//TODO add toast when shot or match is added
+//TODO add toast if location is not selected
+//TODO finish data transfer method
+//TODO update homescreen design
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,37 +47,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DataCollectionActivity.class);
-                startActivityForResult(intent, 69);
+                startActivity(intent);
             }
         });
-
-        db = Room.databaseBuilder(getApplicationContext(), MatchDatabase.class, "match-info-database").allowMainThreadQueries().build();
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        List<MatchData> md = new ArrayList<>();
-        for (Match mMatch: db.matchDao().getAll()) {
-            MatchData data = new MatchData(mMatch.teamNumber, mMatch.matchNumber, mMatch.isRed, mMatch.positionControl, mMatch.rotationControl, mMatch.climbed, mMatch.dead, mMatch.missedShots, mMatch.lowerShots, mMatch.upperShots, mMatch.innerShots);
-            data.setUid(UUID.fromString(mMatch.uid));
-            md.add(data);
-        }
-        mAdapter = new DataAdapter(md);
-        recyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         db = Room.databaseBuilder(getApplicationContext(), MatchDatabase.class, "match-info-database").allowMainThreadQueries().build();
-        List<MatchData> md = new ArrayList<>();
-        for (Match mMatch: db.matchDao().getAll()) {
-            MatchData data = new MatchData(mMatch.teamNumber, mMatch.matchNumber, mMatch.isRed, mMatch.positionControl, mMatch.rotationControl, mMatch.climbed, mMatch.dead, mMatch.missedShots, mMatch.lowerShots, mMatch.upperShots, mMatch.innerShots);
-            data.setUid(UUID.fromString(mMatch.uid));
-            md.add(data);
-        }
+        List<Match> md = new ArrayList<>(db.matchDao().getAll());
         mAdapter = new DataAdapter(md);
         recyclerView.setAdapter(mAdapter);
     }
@@ -106,30 +91,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 69) {
-            if (resultCode == RESULT_OK) {
-                MatchData matchInfo = new MatchData(data);
-                Match match = new Match();
-                match.uid = UUID.randomUUID().toString();
-                match.teamNumber = matchInfo.getTeamNumber();
-                match.matchNumber = matchInfo.getMatchNumber();
-                match.isRed = matchInfo.isRed();
-                match.positionControl = matchInfo.isPositionControl();
-                match.rotationControl = matchInfo.isRotationControl();
-                match.climbed = matchInfo.getClimbed();
-                match.dead = matchInfo.isDead();
-                match.missedShots = matchInfo.getMissedShots();
-                match.lowerShots = matchInfo.getLowerShots();
-                match.upperShots = matchInfo.getUpperShots();
-                match.innerShots = matchInfo.getInnerShots();
-
-                db.matchDao().insertAll(match);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

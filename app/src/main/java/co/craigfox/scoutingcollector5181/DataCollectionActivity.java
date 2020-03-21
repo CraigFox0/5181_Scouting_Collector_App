@@ -2,8 +2,10 @@ package co.craigfox.scoutingcollector5181;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.room.Room;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,7 +17,11 @@ import android.widget.ToggleButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class DataCollectionActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+public class DataCollectionActivity extends AppCompatActivity implements HeatMapDialog.NoticeDialogListener {
 
     EditText teamNumber;
     ToggleButton alliance;
@@ -33,6 +39,12 @@ public class DataCollectionActivity extends AppCompatActivity {
     SeekBar upperShots;
     SeekBar innerShots;
     Button submitButton;
+
+    ArrayList<Shot> shotData;
+    UUID matchUUID;
+
+    MatchDatabase matchDB;
+    ShotDatabase shotDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +66,21 @@ public class DataCollectionActivity extends AppCompatActivity {
         upperShots = findViewById(R.id.seekBar_upper);
         innerShots = findViewById(R.id.seekBar_inner);
         submitButton = findViewById(R.id.button_shot_submit);
+
+        shotData = new ArrayList<>();
+        matchUUID = UUID.randomUUID();
+
+        matchDB = Room.databaseBuilder(getApplicationContext(), MatchDatabase.class, "match-info-database").allowMainThreadQueries().build();
+        shotDB = Room.databaseBuilder(getApplicationContext(), ShotDatabase.class, "shot-info-database").allowMainThreadQueries().build();
+
         FloatingActionButton fab = findViewById(R.id.fab);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new HeatMapDialog();
-                newFragment.show(getSupportFragmentManager(), "heat_map");
+                if (missShots.getProgress() + lowerShots.getProgress() + upperShots.getProgress() + innerShots.getProgress() > 0) {
+                    DialogFragment heatDialog = new HeatMapDialog();
+                    heatDialog.show(getSupportFragmentManager(), "heat_map");
+                }
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -76,22 +97,31 @@ public class DataCollectionActivity extends AppCompatActivity {
                     climb = 3;
                 }
                 if (teamNumber.getText().toString().length() != 0 && matchNumber.getText().toString().length() != 0) {
-                    MatchData matchInfo = new MatchData(Integer.parseInt(teamNumber.getText().toString()),
+                    Match match = new Match(matchUUID.toString(),
+                            Integer.parseInt(teamNumber.getText().toString()),
                             Integer.parseInt(matchNumber.getText().toString()),
                             alliance.isChecked(),
                             positionControl.isChecked(),
                             rotationControl.isChecked(),
                             climb,
-                            dead.isChecked(),
-                            missShots.getProgress(),
-                            lowerShots.getProgress(),
-                            upperShots.getProgress(),
-                            innerShots.getProgress()
+                            dead.isChecked()
                     );
-                    setResult(RESULT_OK, matchInfo.toIntent());
+                    matchDB.matchDao().insertAll(match);
+                    shotDB.shotDao().insertAll(shotData.toArray(new Shot[]{}));
                     finish();
                 }
             }
         });
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Log.e("MEOW", "Test");
+        shotData.add(new Shot(UUID.randomUUID().toString(), matchUUID.toString(), ((HeatMapDialog) dialog).auton, ((HeatMapDialog) dialog).x, ((HeatMapDialog) dialog).y, missShots.getProgress(), lowerShots.getProgress(), upperShots.getProgress(), innerShots.getProgress()));
+        missShots.setProgress(0);
+        lowerShots.setProgress(0);
+        upperShots.setProgress(0);
+        innerShots.setProgress(0);
+        Log.e("MEOW", ""+ innerShots.getProgress());
     }
 }

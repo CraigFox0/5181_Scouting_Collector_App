@@ -16,29 +16,41 @@ public class Match {
     public int matchNumber;
 
     @ColumnInfo(name = "is_red")
-    public boolean isRed;
+    boolean isRed;
 
     @ColumnInfo(name = "position_control")
-    public boolean positionControl;
+    boolean positionControl;
 
     @ColumnInfo(name = "rotation_control")
-    public boolean rotationControl;
+    boolean rotationControl;
 
     @ColumnInfo(name = "climbed")
-    public int climbed;
+    int climbed;
 
     @ColumnInfo(name = "dead")
-    public boolean dead;
+    boolean dead;
 
-    @ColumnInfo(name = "missed_shots")
-    public int missedShots;
+    public Match(@NonNull String uid, int teamNumber, int matchNumber, boolean isRed, boolean positionControl, boolean rotationControl, int climbed, boolean dead) {
+        this.uid = uid;
+        this.teamNumber = teamNumber;
+        this.matchNumber = matchNumber;
+        this.isRed = isRed;
+        this.positionControl = positionControl;
+        this.rotationControl = rotationControl;
+        this.climbed = climbed;
+        this.dead = dead;
+    }
 
-    @ColumnInfo(name = "lower_shots")
-    public int lowerShots;
+    @NonNull
+    public String getUid() {
+        return uid;
+    }
 
-    @ColumnInfo(name = "upper_shots")
-    public int upperShots;
+    int getMatchNumber() {
+        return matchNumber;
+    }
 
-    @ColumnInfo(name = "inner_shots")
-    public int innerShots;
+    int getTeamNumber() {
+        return teamNumber;
+    }
 }

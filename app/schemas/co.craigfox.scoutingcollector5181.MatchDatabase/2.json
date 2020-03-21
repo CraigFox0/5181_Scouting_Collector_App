@@ -1,0 +1,76 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "4670ae8747b50ca80efc587faec519b6",
+    "entities": [
+      {
+        "tableName": "Match",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` TEXT NOT NULL, `team_number` INTEGER NOT NULL, `match_number` INTEGER NOT NULL, `is_red` INTEGER NOT NULL, `position_control` INTEGER NOT NULL, `rotation_control` INTEGER NOT NULL, `climbed` INTEGER NOT NULL, `dead` INTEGER NOT NULL, PRIMARY KEY(`uid`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "teamNumber",
+            "columnName": "team_number",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "matchNumber",
+            "columnName": "match_number",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isRed",
+            "columnName": "is_red",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "positionControl",
+            "columnName": "position_control",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rotationControl",
+            "columnName": "rotation_control",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "climbed",
+            "columnName": "climbed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dead",
+            "columnName": "dead",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4670ae8747b50ca80efc587faec519b6')"
+    ]
+  }
+}

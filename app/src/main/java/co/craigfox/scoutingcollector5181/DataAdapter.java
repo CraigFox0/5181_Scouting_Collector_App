@@ -18,7 +18,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.util.List;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> {
-    private List<MatchData> mDataset;
+    private List<Match> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -37,7 +37,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DataAdapter(List<MatchData> myDataset) {
+    public DataAdapter(List<Match> myDataset) {
         mDataset = myDataset;
     }
 
@@ -59,14 +59,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
         holder.textViewTeamNumber.setText("Team: " + mDataset.get(position).getTeamNumber());
         holder.textViewMatchNumber.setText("Match: " + mDataset.get(position).getMatchNumber());
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(mDataset.get(position).toString(), BarcodeFormat.QR_CODE,500,500);
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-            holder.imageViewQRCode.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            BitMatrix bitMatrix = multiFormatWriter.encode(mDataset.get(position).toString(), BarcodeFormat.QR_CODE,500,500);
+//            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+//            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+//            holder.imageViewQRCode.setImageBitmap(bitmap);
+//        } catch (WriterException e) {
+//            e.printStackTrace();
+//        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
