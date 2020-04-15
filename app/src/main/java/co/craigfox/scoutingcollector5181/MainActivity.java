@@ -24,8 +24,7 @@ import java.util.List;
 //TODO change ToggleButton color for alliance
 //TODO add toast when shot or match is added
 //TODO add toast if location is not selected
-//TODO finish data transfer method
-//TODO update homescreen design
+//TODO update homescreen design (should show team and match number on same line in a list)
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,13 +79,8 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if (id == R.id.clear_database) {
+        if (id == R.id.clear_database) {
             db.matchDao().deleteAll();
-            //TODO way to reset without restarting (b/c poor design and back button behaviour)
             recreate();
         }
 
