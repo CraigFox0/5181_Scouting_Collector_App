@@ -1,4 +1,4 @@
-# 5181_Scouting_Collector_App
+# 5181 Scouting Collector App
 
 Android app for FRC Team 5181's scouting
 
